@@ -1,5 +1,6 @@
 package com.hackaton.nearme.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
@@ -17,10 +18,10 @@ public class Coupon {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long coupon_id;
 
-    @NotNull
+
     private String sn;
 
-    @NotNull
+
     private String code;
 
     @NotNull
@@ -33,4 +34,8 @@ public class Coupon {
     @CreationTimestamp
     private Date expired_date;
 
+    @JsonBackReference
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "promotion_id")
+    private Promotion promotion;
 }

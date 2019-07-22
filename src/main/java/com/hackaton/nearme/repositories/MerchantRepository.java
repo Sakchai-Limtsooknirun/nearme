@@ -1,4 +1,8 @@
 package com.hackaton.nearme.repositories;
 
-public interface MerchantRepository {
+import com.hackaton.nearme.model.Merchant;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MerchantRepository extends JpaRepository<Merchant, Long> {
+
 }
