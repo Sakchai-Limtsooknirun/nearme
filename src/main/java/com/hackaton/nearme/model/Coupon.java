@@ -16,11 +16,7 @@ import java.util.Date;
 public class Coupon {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long coupon_id;
-
-
-    private String sn;
-
+    private Long couponId;
 
     private String code;
 
@@ -28,10 +24,8 @@ public class Coupon {
     @Size(min = 1, max = 100)
     private String description;
 
-    @CreationTimestamp
     private Date created_date;
 
-    @CreationTimestamp
     private Date expired_date;
 
     @JsonBackReference
