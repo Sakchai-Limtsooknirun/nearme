@@ -1,6 +1,7 @@
 package com.hackaton.nearme.services;
 
 import com.hackaton.nearme.model.Coupon;
+import com.hackaton.nearme.model.Promotion;
 import com.hackaton.nearme.repositories.CouponRepository;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
@@ -35,5 +36,14 @@ public class CouponService {
     public List<Coupon> getByCitizenID(String id) {
         return couponRepository.findAllByCitizenId(id);
     }
+
+    public List<Coupon> getAllCouponNotUsed(int promotionId){
+        Promotion promotion = new Promotion();
+        promotion.setPromotionId(promotionId);
+        return couponRepository.findAllByCitizenIdIsNullAndPromotion(promotion);
+
+    }
+
+
 
 }

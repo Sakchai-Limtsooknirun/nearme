@@ -26,7 +26,6 @@ public class CouponController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-
     public ResponseEntity<?> createCoupon(@RequestBody Coupon body) {
 
         body.setCode(UUID.randomUUID().toString().toUpperCase());
@@ -55,9 +54,18 @@ public class CouponController {
         return allCoupon;
     }
 
-    @GetMapping("/citizen/{id}")
-    public ResponseEntity getCouponByCitizenID(@PathVariable String id) {
-        List<Coupon> coupon = couponService.getByCitizenID(id);
+    @GetMapping("/citizen/{citizenId}")
+    public ResponseEntity getCouponByCitizenID(@PathVariable String citizenId) {
+        List<Coupon> coupon = couponService.getByCitizenID(citizenId);
+
+        return coupon != null ?
+                ResponseEntity.ok(coupon) :
+                ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/promotion/{promotionId}")
+    public ResponseEntity getAllCouponNotUsed(@PathVariable int promotionId) {
+        List<Coupon> coupon = couponService.getAllCouponNotUsed(promotionId);
 
         return coupon != null ?
                 ResponseEntity.ok(coupon) :
