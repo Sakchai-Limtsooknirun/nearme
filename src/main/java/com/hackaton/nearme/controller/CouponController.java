@@ -65,7 +65,7 @@ public class CouponController {
 
     @GetMapping("/promotion/{promotionId}")
     public ResponseEntity getAllCouponNotUsed(@PathVariable int promotionId) {
-        List<Coupon> coupon = couponService.getAllCouponNotUsed(promotionId);
+        List<Coupon> coupon = couponService.getAllCouponNotUsedByPromotionId(promotionId);
 
         return coupon != null ?
                 ResponseEntity.ok(coupon) :

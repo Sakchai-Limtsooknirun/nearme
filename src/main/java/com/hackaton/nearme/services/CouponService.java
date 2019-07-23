@@ -37,7 +37,7 @@ public class CouponService {
         return couponRepository.findAllByCitizenId(id);
     }
 
-    public List<Coupon> getAllCouponNotUsed(int promotionId){
+    public List<Coupon> getAllCouponNotUsedByPromotionId(int promotionId){
         Promotion promotion = new Promotion();
         promotion.setPromotionId(promotionId);
         return couponRepository.findAllByCitizenIdIsNullAndPromotion(promotion);
