@@ -1,41 +1,43 @@
 package com.hackaton.nearme.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 import java.util.Date;
 
 @Data
 @Entity
-public class Coupon {
+@Table(name="Coupon")
+@JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
+public class Coupon implements Serializable {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long coupon_id;
-
-
-    private String sn;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int couponId;
 
 
     private String code;
 
-    @NotNull
+
     @Size(min = 1, max = 100)
     private String description;
 
     @CreationTimestamp
-    private Date created_date;
+    private Date createdDate;
 
     @CreationTimestamp
-    private Date expired_date;
+    private Date expiredDate;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
+
+    private String citizenID;
 }
