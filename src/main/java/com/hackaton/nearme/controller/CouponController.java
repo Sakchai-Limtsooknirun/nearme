@@ -10,9 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
-import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
@@ -56,6 +53,15 @@ public class CouponController {
     public List<Coupon> getAllCoupon() {
         List<Coupon> allCoupon = couponService.getCoupon();
         return allCoupon;
+    }
+
+    @GetMapping("/citizen/{id}")
+    public ResponseEntity getCouponByCitizenID(@PathVariable String id) {
+        List<Coupon> coupon = couponService.getByCitizenID(id);
+
+        return coupon != null ?
+                ResponseEntity.ok(coupon) :
+                ResponseEntity.notFound().build();
     }
 
 }

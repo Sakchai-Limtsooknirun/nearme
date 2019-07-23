@@ -39,5 +39,8 @@ public class Coupon implements Serializable {
     private Promotion promotion;
 
     @JsonProperty("customer_id")
-    private String citizenID;
+    private String citizenId;
+
+    @Lob
+    private String qrCode;
 }

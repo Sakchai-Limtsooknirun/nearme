@@ -30,7 +30,10 @@ public class CouponService {
                 () -> new NotFoundException("Not found")
         );
 
+    }
 
+    public List<Coupon> getByCitizenID(String id) {
+        return couponRepository.findAllByCitizenId(id);
     }
 
 }
