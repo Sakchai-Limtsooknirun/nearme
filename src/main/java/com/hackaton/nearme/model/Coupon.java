@@ -14,11 +14,12 @@ import java.util.Date;
 
 @Data
 @Entity
-@Table(name="Coupon")
+@Table(name = "Coupon")
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class Coupon implements Serializable {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private int couponId;
 
     private String code;
@@ -28,9 +29,9 @@ public class Coupon implements Serializable {
     private String description;
 
 
-    private Date created_date;
+    private Date createdDate;
 
-    private Date expired_date;
+    private Date expiredDate;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
