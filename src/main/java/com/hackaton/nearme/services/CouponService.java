@@ -5,10 +5,6 @@ import com.hackaton.nearme.repositories.CouponRepository;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
-
-import java.util.ArrayList;
-import java.util.Optional;
-
 import java.util.List;
 
 @Service
@@ -25,24 +21,14 @@ public class CouponService {
         return couponRepository.findAll();
     }
 
-    public Coupon getCoupon(Long id) {
-        return couponRepository.findAllByCouponId(id);
-    }
-
     public Coupon createCoupon(Coupon body) {
         return couponRepository.save(body);
     }
 
     public Coupon getCouponById(int id) throws NotFoundException {
-        Optional<Coupon> optional = couponRepository.findById(id);
-        if (optional.isPresent()) {
-            Coupon coupon = optional.get();
-            return coupon;
-
-        } else {
-            throw new NotFoundException("Not Found");
-        }
-
+        return couponRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Not found")
+        );
 
     }
 
