@@ -34,14 +34,9 @@ public class CouponService {
     }
 
     public Coupon getCouponById(int id) throws NotFoundException {
-        Optional<Coupon> optional = couponRepository.findById(id);
-        if (optional.isPresent()) {
-            Coupon coupon = optional.get();
-            return coupon;
-
-        } else {
-            throw new NotFoundException("Not Found");
-        }
+        return couponRepository.findById(id).orElseThrow(
+                () -> new NotFoundException("Not found")
+        );
 
 
     }
