@@ -21,23 +21,22 @@ public class Coupon implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int couponId;
 
-
     private String code;
 
 
     @Size(min = 1, max = 100)
     private String description;
 
-    @CreationTimestamp
-    private Date createdDate;
 
-    @CreationTimestamp
-    private Date expiredDate;
+    private Date created_date;
+
+    private Date expired_date;
 
     @JsonBackReference
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "promotion_id")
     private Promotion promotion;
 
+    @JsonProperty("customer_id")
     private String citizenID;
 }
