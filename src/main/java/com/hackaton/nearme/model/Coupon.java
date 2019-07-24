@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
 
 import javax.persistence.*;
 import javax.validation.constraints.Size;
@@ -23,6 +24,7 @@ public class Coupon implements Serializable {
 
     private String code;
 
+    private String titleName;
 
     @Size(min = 1, max = 100)
     private String description;
@@ -40,8 +42,8 @@ public class Coupon implements Serializable {
     @JsonProperty("customer_id")
     private String citizenId;
 
-    private boolean deleted;
-
+    @URL
+    private String imagePath ;
     @Lob
     private String qrCode ;
 
