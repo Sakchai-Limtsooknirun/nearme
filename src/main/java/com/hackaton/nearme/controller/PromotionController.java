@@ -11,14 +11,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
-@RequestMapping(path="/promotion")
+@RequestMapping(path = "/promotion")
 public class PromotionController {
 
     private PromotionService promotionService;
 
     @Autowired
-    public PromotionController(PromotionService promotionService){
+    public PromotionController(PromotionService promotionService) {
         this.promotionService = promotionService;
     }
 
@@ -26,8 +28,14 @@ public class PromotionController {
     public ResponseEntity getPromotionById(@PathVariable int id) throws NotFoundException {
         try {
             return ResponseEntity.ok(promotionService.getPromotionById(id));
-        }catch (NotFoundException e){
+        } catch (NotFoundException e) {
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @RequestMapping("/all")
+    public List<Promotion> getAllMerchant() {
+        List<Promotion> promotions = promotionService.getPromotion();
+        return promotions;
     }
 }

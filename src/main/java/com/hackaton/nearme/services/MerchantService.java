@@ -5,6 +5,8 @@ import com.hackaton.nearme.repositories.MerchantRepository;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class MerchantService {
@@ -24,6 +26,10 @@ public class MerchantService {
                 () -> new NotFoundException("Not found")
         );
 
+    }
+
+    public List<Merchant> getMerchant() {
+        return merchantRepository.findAll();
     }
 
 

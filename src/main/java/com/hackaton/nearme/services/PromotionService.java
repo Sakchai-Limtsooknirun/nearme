@@ -6,6 +6,8 @@ import com.hackaton.nearme.repositories.PromotionRepository;
 import javassist.NotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PromotionService {
 
@@ -20,5 +22,9 @@ public class PromotionService {
                 () -> new NotFoundException("Not found")
         );
 
+    }
+
+    public List<Promotion> getPromotion() {
+        return promotionRepository.findAll();
     }
 }

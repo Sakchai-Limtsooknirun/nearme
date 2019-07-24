@@ -30,20 +30,18 @@ public class CouponService {
         return couponRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Not found")
         );
-
     }
 
     public List<Coupon> getByCitizenID(String id) {
         return couponRepository.findAllByCitizenId(id);
     }
 
-    public List<Coupon> getAllCouponNotUsedByPromotionId(int promotionId){
+    public List<Coupon> getAllCouponNotUsedByPromotionId(int promotionId) {
         Promotion promotion = new Promotion();
         promotion.setPromotionId(promotionId);
         return couponRepository.findAllByCitizenIdIsNullAndPromotion(promotion);
 
     }
-
 
 
 }
