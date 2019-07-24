@@ -40,6 +40,8 @@ public class Promotion implements Serializable {
 
     private String description;
 
+    private String imagePath;
+
     private Date startAt;
 
     private Date expiresAt;

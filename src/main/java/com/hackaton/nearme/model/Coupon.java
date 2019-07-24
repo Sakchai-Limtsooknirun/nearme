@@ -19,7 +19,7 @@ import java.util.Date;
 public class Coupon implements Serializable {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int couponId;
 
     private String merchantName;
@@ -43,7 +43,6 @@ public class Coupon implements Serializable {
     @JsonProperty("customer_id")
     private String citizenId;
 
-    @URL
     private String imagePath;
     @Lob
     private String qrCode;

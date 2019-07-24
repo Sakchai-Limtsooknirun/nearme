@@ -25,18 +25,6 @@ public class CouponController {
         this.couponService = couponService;
     }
 
-    //    @RequestMapping(method = RequestMethod.POST)
-//    public ResponseEntity<?> createCoupon(@RequestBody Coupon body) {
-//
-//        body.setCode(UUID.randomUUID().toString().toUpperCase());
-//        body.setCreatedDate(dateTimeCreation.getCreatedDate());
-//        body.setExpiredDate(dateTimeCreation.getExpiredDate());
-//
-//        Coupon coupon = couponService.createCoupon(body);
-//        System.err.println(coupon);
-//
-//        return ResponseEntity.status(HttpStatus.CREATED).body(coupon);
-//    }
     @RequestMapping(method = RequestMethod.POST)
     public ResponseEntity<?> createCoupon(@RequestBody Coupon body) {
 
