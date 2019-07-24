@@ -22,13 +22,14 @@ public class Coupon implements Serializable {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int couponId;
 
+    private String merchantName;
+
     private String code;
 
     private String titleName;
 
     @Size(min = 1, max = 100)
     private String description;
-
 
     private Date createdDate;
 
@@ -43,9 +44,9 @@ public class Coupon implements Serializable {
     private String citizenId;
 
     @URL
-    private String imagePath ;
+    private String imagePath;
     @Lob
-    private String qrCode ;
+    private String qrCode;
 
 
 }

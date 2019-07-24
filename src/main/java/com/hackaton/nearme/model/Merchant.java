@@ -34,6 +34,10 @@ public class Merchant implements Serializable {
 
     private String terminalPrefix ;
 
+    private double latitude;
+
+    private double longitude;
+
     @JsonManagedReference
     @OneToMany(
             mappedBy = "merchant",
