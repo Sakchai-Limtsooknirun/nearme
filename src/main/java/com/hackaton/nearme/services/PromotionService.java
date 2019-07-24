@@ -1,20 +1,33 @@
 package com.hackaton.nearme.services;
 
+import com.hackaton.nearme.model.Coupon;
 import com.hackaton.nearme.model.Merchant;
 import com.hackaton.nearme.model.Promotion;
+import com.hackaton.nearme.repositories.CouponRepository;
 import com.hackaton.nearme.repositories.PromotionRepository;
+import com.hackaton.nearme.utils.DateTimeCreation;
 import javassist.NotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 public class PromotionService {
 
     private PromotionRepository promotionRepository;
 
-    public PromotionService(PromotionRepository promotionRepository) {
+    private CouponRepository couponRepository ;
+
+    private DateTimeCreation dateTimeCreation ;
+
+    public PromotionService(PromotionRepository promotionRepository ,CouponRepository couponRepository) {
         this.promotionRepository = promotionRepository;
+        this.couponRepository = couponRepository ;
+        dateTimeCreation = new DateTimeCreation();
+
     }
 
     public Promotion getPromotionById(int id) throws NotFoundException {
@@ -27,4 +40,33 @@ public class PromotionService {
     public List<Promotion> getPromotion() {
         return promotionRepository.findAll();
     }
+
+    public Promotion createPromotion(Promotion promotion){
+
+        Merchant merchant = new Merchant();
+        merchant.setMId(1);
+        merchant.setMerchantName("The Sea Terrace restaurant at Sunset Village Beach Resort");
+        promotion.setMerchant(merchant);
+        Promotion newPromotion = promotionRepository.save(promotion);
+        for (int i = 0; i < promotion.getQuantity(); i++) {
+            couponRepository.save(prepareCoupon(newPromotion));
+        }
+
+        return  newPromotion;
+    }
+
+    private Coupon prepareCoupon(Promotion promotion){
+        Coupon coupon = new Coupon() ;
+        coupon.setCode("3A7E1C97-BD09-4FCB-9141-E82AF8AFA7C9");
+        coupon.setQrCode("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");
+        coupon.setCreatedDate(dateTimeCreation.getCreatedDate());
+        coupon.setExpiredDate(dateTimeCreation.getExpiredDate());
+        coupon.setPromotion(promotion);
+        coupon.setDescription("E-Coupon Hana แซลมอลซาชิมิ / Salmon Sashimi มูลค่า 250 บาท");
+        coupon.setImagePath("https://img.wongnai.com/p/1600x0/2019/05/29/b6411d9495ac42e6b7a1ab67c01a14b8.jpg");
+        coupon.setTitleName("ปลากะพงสามรส");
+        coupon.setMerchantName(promotion.getMerchant().getMerchantName());
+        return coupon;
+    }
+
 }

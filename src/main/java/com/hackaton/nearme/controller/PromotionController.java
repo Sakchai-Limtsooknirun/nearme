@@ -3,15 +3,16 @@ package com.hackaton.nearme.controller;
 import com.hackaton.nearme.model.Promotion;
 import com.hackaton.nearme.services.MerchantService;
 import com.hackaton.nearme.services.PromotionService;
+import com.hackaton.nearme.utils.DateTimeCreation;
 import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 @RequestMapping(path = "/promotion")
@@ -34,8 +35,14 @@ public class PromotionController {
     }
 
     @RequestMapping("/all")
-    public List<Promotion> getAllMerchant() {
+    public List<Promotion> getAllPromotion() {
         List<Promotion> promotions = promotionService.getPromotion();
         return promotions;
+    }
+    @RequestMapping(method = POST)
+    public ResponseEntity createPromotion(@RequestBody Promotion promotion){
+        Promotion newPromotion = promotionService.createPromotion(promotion);
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(newPromotion) ;
     }
 }
