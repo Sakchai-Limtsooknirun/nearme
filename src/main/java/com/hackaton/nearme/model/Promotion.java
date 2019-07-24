@@ -36,6 +36,7 @@ public class Promotion implements Serializable {
     )
     private List<Coupon> couponList = new ArrayList<>();
 
+    private String titleName ;
 
     private String description;
 
@@ -47,5 +48,8 @@ public class Promotion implements Serializable {
 
     private String product;
 
-    private boolean deleted;
+    private double originalPrice ;
+
+    private double discountPrice ;
+
 }
