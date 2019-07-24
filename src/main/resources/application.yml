@@ -11,6 +11,6 @@ spring:
 
 
   datasource:
-    url: jdbc:mysql://localhost:3307/db_nearme?useUnicode=yes&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3307/test
     username: root
     password: ""

@@ -26,6 +26,10 @@ public class CouponService {
         return couponRepository.save(body);
     }
 
+    public List<Coupon> createCoupons(List<Coupon> coupons) {
+        return couponRepository.saveAll(coupons);
+    }
+
     public Coupon getCouponById(int id) throws NotFoundException {
         return couponRepository.findById(id).orElseThrow(
                 () -> new NotFoundException("Not found")
