@@ -40,8 +40,8 @@ public class PromotionController {
         return promotions;
     }
     @RequestMapping(method = POST)
-    public ResponseEntity createPromotion(@RequestBody Promotion promotion){
-        Promotion newPromotion = promotionService.createPromotion(promotion);
+    public ResponseEntity createPromotion(@RequestParam int merchantId, @RequestBody Promotion promotion){
+        Promotion newPromotion = promotionService.createPromotion(merchantId, promotion);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(newPromotion) ;
     }

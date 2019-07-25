@@ -4,6 +4,7 @@ import com.hackaton.nearme.model.Coupon;
 import com.hackaton.nearme.model.Merchant;
 import com.hackaton.nearme.model.Promotion;
 import com.hackaton.nearme.repositories.CouponRepository;
+import com.hackaton.nearme.repositories.MerchantRepository;
 import com.hackaton.nearme.repositories.PromotionRepository;
 import com.hackaton.nearme.utils.DateTimeCreation;
 import javassist.NotFoundException;
@@ -22,15 +23,19 @@ import java.util.UUID;
 @Service
 public class PromotionService {
 
+
     private PromotionRepository promotionRepository;
 
     private CouponRepository couponRepository;
 
+    private MerchantRepository merchantRepository;
+
     private DateTimeCreation dateTimeCreation;
 
-    public PromotionService(PromotionRepository promotionRepository, CouponRepository couponRepository) {
+    public PromotionService(PromotionRepository promotionRepository, CouponRepository couponRepository, MerchantRepository merchantRepository) {
         this.promotionRepository = promotionRepository;
         this.couponRepository = couponRepository;
+        this.merchantRepository = merchantRepository;
         this.dateTimeCreation = new DateTimeCreation();
     }
 
@@ -45,11 +50,9 @@ public class PromotionService {
         return promotionRepository.findAll();
     }
 
-    public Promotion createPromotion(Promotion promotion) {
+    public Promotion createPromotion(int merchantId, Promotion promotion) {
 
-        Merchant merchant = new Merchant();
-        merchant.setMId(4);
-        merchant.setMerchantName("Test shop");
+        Merchant merchant = merchantRepository.findById(merchantId).get();
         promotion.setMerchant(merchant);
         promotion.setStartAt(dateTimeCreation.getCreatedDate());
         promotion.setExpiresAt(dateTimeCreation.getExpiredDate());

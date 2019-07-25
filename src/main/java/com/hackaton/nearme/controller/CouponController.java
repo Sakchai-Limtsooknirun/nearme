@@ -75,26 +75,24 @@ public class CouponController {
 
     @DeleteMapping("/code/{couponCode}")
     public ResponseEntity deleteCouponByCode(@PathVariable String couponCode) {
-       boolean deleted = couponService.deleteCouponByCode(couponCode);
+        boolean deleted = couponService.deleteCouponByCode(couponCode);
 
-        return deleted  ?
+        return deleted ?
                 ResponseEntity.ok().build() :
                 ResponseEntity.notFound().build();
     }
 
 
-
     @PutMapping
-    public ResponseEntity<?> putCoupon(@RequestParam int couponId, @RequestParam String citizenId) throws NotFoundException {
-        Coupon coupon = couponService.getCouponById(couponId);
+    public ResponseEntity<?> putCoupon(@RequestParam int promotionId, @RequestParam String citizenId) throws NotFoundException {
 
-        List<Coupon> coupons = couponService.getAllCouponNotUsedByPromotionId(coupon.getPromotion().getPromotionId());
+        List<Coupon> coupons = couponService.getAllCouponNotUsedByPromotionId(promotionId);
         Coupon updateCoupon = coupons.get(0);
         updateCoupon.setCitizenId(citizenId);
         couponService.updateCoupon(updateCoupon.getCouponId(), updateCoupon);
 
-        return coupon != null ?
-                ResponseEntity.ok(coupon) :
+        return updateCoupon != null ?
+                ResponseEntity.ok(updateCoupon) :
                 ResponseEntity.notFound().build();
     }
 
