@@ -47,6 +47,7 @@ public class CouponService {
 
     }
 
+
     public boolean deleteCouponByCode(String code)  {
         if (couponRepository.deleteByCode(code)==1){
             return true ;
@@ -54,6 +55,14 @@ public class CouponService {
 
     }
 
+    public Coupon updateCoupon(int id, Coupon coupon) {
+
+        if (couponRepository.findById(id).isPresent()) {
+            return couponRepository.save(coupon);
+        }
+
+        return null;
+    }
 
 
 }

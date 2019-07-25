@@ -84,4 +84,18 @@ public class CouponController {
 
 
 
+    @PutMapping
+    public ResponseEntity<?> putCoupon(@RequestParam int couponId, @RequestParam String citizenId) throws NotFoundException {
+        Coupon coupon = couponService.getCouponById(couponId);
+
+        List<Coupon> coupons = couponService.getAllCouponNotUsedByPromotionId(coupon.getPromotion().getPromotionId());
+        Coupon updateCoupon = coupons.get(0);
+        updateCoupon.setCitizenId(citizenId);
+        couponService.updateCoupon(updateCoupon.getCouponId(), updateCoupon);
+
+        return coupon != null ?
+                ResponseEntity.ok(coupon) :
+                ResponseEntity.notFound().build();
+    }
+
 }
