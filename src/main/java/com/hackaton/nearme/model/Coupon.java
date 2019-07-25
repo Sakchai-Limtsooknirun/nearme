@@ -43,7 +43,9 @@ public class Coupon implements Serializable {
     @JsonProperty("customer_id")
     private String citizenId;
 
+    @URL
     private String imagePath;
+
     @Lob
     private String qrCode;
 

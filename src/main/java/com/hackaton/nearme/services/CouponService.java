@@ -4,6 +4,7 @@ import com.hackaton.nearme.model.Coupon;
 import com.hackaton.nearme.model.Promotion;
 import com.hackaton.nearme.repositories.CouponRepository;
 import javassist.NotFoundException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -45,6 +46,15 @@ public class CouponService {
         promotion.setPromotionId(promotionId);
         return couponRepository.findAllByCitizenIdIsNullAndPromotion(promotion);
 
+    }
+
+    public Coupon updateCoupon(int id, Coupon coupon) {
+
+        if (couponRepository.findById(id).isPresent()) {
+            return couponRepository.save(coupon);
+        }
+
+        return null;
     }
 
 
