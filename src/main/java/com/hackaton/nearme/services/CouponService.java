@@ -47,5 +47,13 @@ public class CouponService {
 
     }
 
+    public boolean deleteCouponByCode(String code)  {
+        if (couponRepository.deleteByCode(code)==1){
+            return true ;
+        }else return false;
+
+    }
+
+
 
 }

@@ -73,4 +73,15 @@ public class CouponController {
                 ResponseEntity.notFound().build();
     }
 
+    @DeleteMapping("/code/{couponCode}")
+    public ResponseEntity deleteCouponByCode(@PathVariable String couponCode) {
+       boolean deleted = couponService.deleteCouponByCode(couponCode);
+
+        return deleted  ?
+                ResponseEntity.ok().build() :
+                ResponseEntity.notFound().build();
+    }
+
+
+
 }
